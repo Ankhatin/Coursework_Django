@@ -1,0 +1,13 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+<div class="col-md-4 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'mailing:create' %}">Создать рассылку</a>
+</div>
+<div class="row">
+    <ul class="list-group">
+        <li class="list-group-item">Количество рассылок</li>
+        <li class="list-group-item">Количество активных рассылок</li>
+        <li class="list-group-item">Количество уникальных клиентов для рассылок</li>
+    </ul>
+</div>
+{% endblock %}

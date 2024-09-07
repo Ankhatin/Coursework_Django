@@ -1,0 +1,30 @@
+{% extends 'mailing/base.html' %}
+{% load tags %}
+{% block content %}
+<div class="col-md-4 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'mailing:message_create' %}">Создать сообщение</a>
+</div>
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-md-4 text-center">
+        <div class="card rounded-3 shadow-sm mb-2">
+            <div class="card-header py-3">
+                <h3 class="card-title pricing-card-title">{{ object.topic }}</h3>
+            </div>
+            <div class="card-body">
+                <img src="{% add_path object.media %}" class="img-fluid" style="max-height: 400px">
+                <p>Текст сообщения: {{ object.body | slice:100 }}</p>
+            </div>
+            <div class="card-footer">
+                <div class="bnt-group">
+                    <a type="button" href="{% url 'mailing:message' object.pk %}"
+                       class="btn btn-sm btn-secondary">Посмотреть</a>
+                    <a type="button" href="{% url 'mailing:message_edit' object.pk %}" class="btn btn-sm btn-warning">Редактировать</a>
+                    <a type="button" href="{% url 'mailing:message_delete' object.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

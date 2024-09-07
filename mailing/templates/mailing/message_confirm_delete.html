@@ -1,0 +1,15 @@
+{% extends 'mailing/base.html' %}
+{% block content %}>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card rounded-3 shadow-sm pl-2">
+            <form method="post">
+                {% csrf_token %}
+                <h6>Вы действительно хотите удалить сообщение: {{ object.topic }}</h6>
+                <button type="submit" class="btn btn-danger">Подтвердить</button>
+                <a href="{% url 'mailing:message_list' %}" class="btn btn-warning">Отменить</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+<form class="row justify-content-center" method="post">
+    <div class="col-md-6">
+        <div class="card rounded-3 shadow-sm">
+            <div class="card-header">
+                {% if object %}
+                <h4 class="card-title">
+                    Изменение рассылки
+                </h4>
+                {% else %}
+                <h4 class="card-title">
+                    Создание рассылки
+                </h4>
+                {% endif %}
+            </div>
+            <div class="card-body form-control">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+            {% if object %}
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            {% else %}
+            <button type="submit" class="btn btn-success">Создать</button>
+            {% endif %}
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'mailing/base.html' %}
+{% load tags %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card rounded-3 shadow-sm mb-2 h-100">
+            <div class="card-header py-3 text-center">
+                <h3 class="card-title pricing-card-title">{{ object.title }}</h3>
+            </div>
+            <div class="card-body">
+                <img src="{% add_path object.preview %}" class="img-fluid" style="max-height: 400px" alt="">
+                <p>{{ object.body }}</p>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

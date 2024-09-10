@@ -22,12 +22,16 @@
         <td>{{ object.comment }}</td>
         <td>
             <div class="bnt-group">
+                {% if user.is_staff or user == object.owner %}
                 <a type="button" href="{% url 'mailing:client' object.pk %}"
                    class="btn btn-sm btn-secondary">Посмотреть</a>
+                {% endif %}
+                {% if user == object.owner %}
                 <a type="button" href="{% url 'mailing:client_edit' object.pk %}"
                    class="btn btn-sm btn-warning">Редактировать</a>
                 <a type="button" href="{% url 'mailing:client_delete' object.pk %}"
                    class="btn btn-sm btn-danger">Удалить</a>
+                {% endif %}
             </div>
         </td>
     </tr>

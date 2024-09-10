@@ -1,5 +1,6 @@
 {% extends 'mailing/base.html' %}
 {% block content %}
+
 <div class="col-md-4 mb-5">
     <a class="btn btn-outline-primary" href="{% url 'mailing:create' %}">Создать рассылку</a>
 </div>
@@ -15,13 +16,33 @@
                 <p>Статус: {{ object.status }}</p>
                 <p>Дата начала рассылки: {{ object.date_start }}</p>
                 <p>Периодичность: {{ object.frequency }}</p>
+                <p>{{ object.owner }}</p>
             </div>
             <div class="card-footer">
                 <div class="bnt-group">
+                    {% if user.mailing.can_disable_newsletter or user == object.owner %}
                     <a type="button" href="{% url 'mailing:newsletter' object.pk %}"
                        class="btn btn-sm btn-secondary">Посмотреть</a>
-                    <a type="button" href="{% url 'mailing:edit' object.pk %}" class="btn btn-sm btn-warning">Редактировать</a>
-                    <a type="button" href="{% url 'mailing:delete' object.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                    {% endif %}
+                    {% if user == object.owner %}
+                    <a type="button" href="{% url 'mailing:edit' object.pk %}"
+                       class="btn btn-sm btn-warning">Редактировать</a>
+                    <a type="button" href="{% url 'mailing:delete' object.pk %}"
+                       class="btn btn-sm btn-danger">Удалить</a>
+                    {% endif %}
+                    {% if user.is_staff %}
+                    <form class="row" id="form" action="" method="get">
+                        {% if object.status == "created" or object.status == "launched" %}
+                        <button type="submit" form="form" class="btn btn-danger mt-1" name="block"
+                                value='{{ object.pk }}'>Отключить рассылку
+                        </button>
+                        {% else %}
+                        <button type="submit" form="form"  class="btn btn-success mt-1" name="unblock"
+                                value='{{ object.pk }}'>Запустить рассылку
+                        </button>
+                        {% endif %}
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

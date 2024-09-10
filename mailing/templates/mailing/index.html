@@ -1,13 +1,37 @@
 {% extends 'mailing/base.html' %}
+{% load tags %}
 {% block content %}
 <div class="col-md-4 mb-5">
     <a class="btn btn-outline-primary" href="{% url 'mailing:create' %}">Создать рассылку</a>
 </div>
 <div class="row">
     <ul class="list-group">
-        <li class="list-group-item">Количество рассылок</li>
-        <li class="list-group-item">Количество активных рассылок</li>
-        <li class="list-group-item">Количество уникальных клиентов для рассылок</li>
+        <li class="list-group-item">Количество рассылок: {{ count_of_newsletter }}</li>
+        <li class="list-group-item">Количество активных рассылок: {{ count_of_active }}</li>
+        <li class="list-group-item">Количество уникальных клиентов для рассылок: {{ count_of_unique_clients }}</li>
     </ul>
+</div>
+<div class="mb-5 mt-5">
+    <h3>Статьи из нашего блога</h3>
+</div>
+<div class="row">
+    {% for blog in blogs %}
+    <div class="col-md-4 form-control">
+        <div class="card rounded-3 shadow-sm mb-2">
+            <div class="card-header py-3">
+                <h6 class="card-title pricing-card-title">{{ blog.title }}</h6>
+            </div>
+            <div class="card-body">
+                <p>{{ blog.body | slice:100}}</p>
+                <img src="{% add_path blog.preview %}" class="img-fluid" style="max-height: 400px" alt="">
+                <p>{{ blog.created_at }}</p>
+            </div>
+            <div class="card-footer">
+                <a type="button" href="{% url 'mailing:blog' blog.pk %}"
+                       class="btn btn-sm btn-secondary">Читать далее ...</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

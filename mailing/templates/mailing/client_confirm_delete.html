@@ -5,7 +5,7 @@
         <div class="card rounded-3 shadow-sm pl-2">
             <form method="post">
                 {% csrf_token %}
-                <h6>Вы действительно хотите удалить клиента: {{ object.name }}</h6>
+                <h6>Вы действительно хотите удалить клиента: {{ object.email }}</h6>
                 <button type="submit" class="btn btn-danger">Подтвердить</button>
                 <a href="{% url 'mailing:client_list' %}" class="btn btn-warning">Отменить</a>
             </form>

@@ -6,21 +6,27 @@
 </div>
 <div class="row">
     {% for object in object_list %}
-    <div class="col-md-4 text-center">
-        <div class="card rounded-3 shadow-sm mb-2">
+    <div class="col-md-4 text-center form-control">
+        <div class="card rounded-3 shadow-sm mb-2 form-control">
             <div class="card-header py-3">
                 <h3 class="card-title pricing-card-title">{{ object.topic }}</h3>
             </div>
             <div class="card-body">
-                <img src="{% add_path object.media %}" class="img-fluid" style="max-height: 400px">
+                <img src="{% add_path object.media %}" class="img-fluid" style="max-height: 400px" alt="">
                 <p>Текст сообщения: {{ object.body | slice:100 }}</p>
             </div>
             <div class="card-footer">
                 <div class="bnt-group">
+                    {% if user.is_staff or user == object.owner %}
                     <a type="button" href="{% url 'mailing:message' object.pk %}"
                        class="btn btn-sm btn-secondary">Посмотреть</a>
-                    <a type="button" href="{% url 'mailing:message_edit' object.pk %}" class="btn btn-sm btn-warning">Редактировать</a>
-                    <a type="button" href="{% url 'mailing:message_delete' object.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                    {% endif %}
+                    {% if user == object.owner %}
+                    <a type="button" href="{% url 'mailing:message_edit' object.pk %}"
+                       class="btn btn-sm btn-warning">Редактировать</a>
+                    <a type="button" href="{% url 'mailing:message_delete' object.pk %}"
+                       class="btn btn-sm btn-danger">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

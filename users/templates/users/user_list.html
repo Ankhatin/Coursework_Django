@@ -1,0 +1,31 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Порядковый номер</th>
+        <th scope="col">Контактый email</th>
+        <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ object.email }}</td>
+        <td>
+            <form class="row" id="form" action="" method="get">
+                {% if object.is_active %}
+                <button type="submit" form="form" class="btn btn-danger mb-3" name="block" width="50px"
+                        value='{{ object.pk }}'>Блокировать</button>
+                {% else %}
+                <button type="submit" form="form" class="btn btn-success mb-3 w-4" name="unblock" width="50px"
+                        value='{{ object.pk }}'>Разблокировать</button>
+                {% endif %}
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

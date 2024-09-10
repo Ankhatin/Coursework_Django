@@ -1,4 +1,5 @@
 {% extends 'mailing/base.html' %}
+{% load tags %}
 {% block content %}
 <div class="row">
     <div class="col-md-4">
@@ -7,6 +8,7 @@
                 <h3 class="card-title pricing-card-title">{{ object.topic }}</h3>
             </div>
             <div class="card-body">
+                <img src="{% add_path object.media %}" class="img-fluid" style="max-height: 400px" alt="">
                 <p>Сообщение: {{ object.body }}</p>
                 {% if object.owner %}
                 <p>Пользователь: {{ object.owner }}</p>

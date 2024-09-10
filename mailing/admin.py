@@ -1,3 +1,14 @@
 from django.contrib import admin
+from mailing.models import *
 
-# Register your models here.
+
+admin.site.register(Newsletter)
+
+
+admin.site.register(Client)
+
+
+admin.site.register(Message)
+
+
+admin.site.register(Blog)

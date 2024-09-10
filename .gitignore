@@ -12,3 +12,5 @@ htmlcov/
 
 # Django
 db.sqlite3
+
+../Coursework_Django/.env

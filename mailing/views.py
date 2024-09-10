@@ -142,11 +142,6 @@ class MessageUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/users/login/'
     success_url = reverse_lazy('mailing:message_list')
 
-    # def form_valid(self, form):
-    #     message = form.save()
-    #     message.save()
-    #     return super().form_valid(form)
-
 
 class MessageDeleteView(LoginRequiredMixin, DeleteView):
     model = Message
@@ -200,3 +195,10 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
 
 class BlogDetailView(DetailView):
     model = Blog
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        blog = self.object
+        blog.count_review += 1
+        blog.save()
+        return context_data

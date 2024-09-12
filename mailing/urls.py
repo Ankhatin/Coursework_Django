@@ -7,14 +7,13 @@ from mailing.apps import MailingConfig
 from mailing.views import IndexView, NewsletterListView, NewsletterCreateView, NewsletterDetailView, \
     NewsletterUpdateView, NewsletterDeleteView, MessageListView, MessageDetailView, MessageCreateView, \
     MessageUpdateView, MessageDeleteView, ClientListView, ClientDetailView, ClientUpdateView, ClientDeleteView, \
-    ClientCreateView, ReportView, BlogDetailView
+    ClientCreateView, ReportView
 
 app_name = MailingConfig.name
 
 
 urlpatterns = [
     path('',IndexView.as_view(), name='index'),
-    path('blog/<int:pk>', cache_page(60)(BlogDetailView.as_view()), name="blog"),
     path('mailings/', NewsletterListView.as_view(), name='newsletter_list'),
     path('mailings/report', ReportView.as_view(), name='report'),
     path('newsletter/<int:pk>', NewsletterDetailView.as_view(), name='newsletter'),

@@ -192,13 +192,3 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
     login_url = '/users/login/'
     success_url = reverse_lazy('mailing:client_list')
 
-
-class BlogDetailView(DetailView):
-    model = Blog
-
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        blog = self.object
-        blog.count_review += 1
-        blog.save()
-        return context_data

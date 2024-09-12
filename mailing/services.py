@@ -23,11 +23,10 @@ def start_scheduler():
     и на каждую устанавливает задачу планировщику
     :return:
     '''
-    if scheduler.running:
-        return None
+    # if scheduler.running:
+    #     return None
     work_status = ['created', 'launched']
     current_datetime = timezone.now()
-    # scheduler = BackgroundScheduler(timezone=settings.TIME_ZONE)  # запускаем планировщик в фоновом режиме
     mailings = Newsletter.objects.filter(date_start__lte=current_datetime).filter(status__in=work_status)
     for mailing in mailings:  # цикл по рассылкам
         last_attempt = Attempt.objects.filter(newsletter=mailing).order_by('date_attempt').last()
@@ -39,7 +38,7 @@ def start_scheduler():
             days_to_send = interval - lost_days % interval  # определяем сколько дней от последней попытки до следующей
             next_run_time = last_attempt.date_attempt + timezone.timedelta(days=lost_days + days_to_send)
             scheduler.add_job(send_mailing, 'interval', days=interval, next_run_time=next_run_time, args=[mailing])
-    scheduler.start()
+    print(scheduler)
     print("Список задач планировщика:")
     scheduler.print_jobs()
 

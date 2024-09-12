@@ -24,6 +24,7 @@
             <a class="p-2 text-dark" href="{% url 'mailing:message_list' %}">Сообщения</a>
             <a class="p-2 text-dark" href="{% url 'mailing:client_list' %}">Клиенты</a>
             <a class="p-2 text-dark" href="{% url 'mailing:report' %}">Отчет рассылок</a><br>
+            <a class="p-2 text-dark" href="{% url 'blogs:blog_list' %}">Блог</a><br>
             {% if user.is_authenticated %}
                 <span>Вы авторизованы как: {{ user.email }}</span>
                 <form method="post" action="{% url 'users:logout' %}">

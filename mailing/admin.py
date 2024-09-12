@@ -11,4 +11,4 @@ admin.site.register(Client)
 admin.site.register(Message)
 
 
-admin.site.register(Blog)
+

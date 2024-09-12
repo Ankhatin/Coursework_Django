@@ -1,0 +1,26 @@
+{% extends 'mailing/base.html' %}
+{% load tags %}
+{% block content %}
+
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-md-4 form-control">
+        <div class="card rounded-3 shadow-sm mb-2">
+            <div class="card-header py-3">
+                <h6 class="card-title pricing-card-title">{{ object.title }}</h6>
+            </div>
+           <div class="card-body">
+                <img src="{% add_path object.preview %}" class="img-fluid" style="max-height: 400px" alt="">
+                <p>{{ object.body | slice:100 }}</p>
+            </div>
+            <div class="card-footer">
+                <div class="bnt-group">
+                    <a type="button" href="{% url 'blogs:blog' object.pk %}"
+                       class="btn btn-sm btn-secondary">Прочитать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
